@@ -1,0 +1,24 @@
+{
+  "name": "gridpulse",
+  "version": "1.0.0",
+  "description": "GridPulse application monitoring dashboard",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node --test"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "kubernetes",
+    "devops",
+    "monitoring"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}

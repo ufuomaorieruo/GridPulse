@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="GridPulse application monitoring dashboard">
+  <title>GridPulse | Application Dashboard</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/script.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="/" aria-label="GridPulse home">
+        <span class="brand-mark">G</span>
+        <span>GridPulse</span>
+      </a>
+
+      <div class="sidebar-label">WORKSPACE</div>
+      <a class="nav-link active" href="/">
+        <span class="nav-icon">▦</span>
+        Overview
+      </a>
+
+      <div class="sidebar-bottom">
+        <span class="status-dot"></span>
+        <span>Monitoring workspace</span>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">APPLICATION MONITORING</p>
+          <h1>Overview</h1>
+        </div>
+        <div class="topbar-right">
+          <span class="environment-chip" id="environment-chip">Checking environment</span>
+          <span class="avatar" aria-label="GridPulse">GP</span>
+        </div>
+      </header>
+
+      <section class="welcome">
+        <div>
+          <p class="eyebrow welcome-eyebrow">YOUR SERVICE AT A GLANCE</p>
+          <h2>Good to see you.</h2>
+          <p class="welcome-copy">A simple view of your GridPulse application runtime.</p>
+        </div>
+        <div class="pulse-art" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </section>
+
+      <section class="section-heading">
+        <div>
+          <h2>Application status</h2>
+          <p>Live information retrieved from the GridPulse backend.</p>
+        </div>
+        <button class="refresh-button" id="refresh-button" type="button">
+          <span aria-hidden="true">↻</span> Refresh
+        </button>
+      </section>
+
+      <section class="metrics-grid" aria-label="Application metrics">
+        <article class="metric-card">
+          <div class="metric-top">
+            <span class="metric-label">Service status</span>
+            <span class="metric-symbol green-symbol">●</span>
+          </div>
+          <div class="metric-value" id="service-status">Checking</div>
+          <p class="metric-foot" id="service-detail">Contacting backend…</p>
+        </article>
+
+        <article class="metric-card">
+          <div class="metric-top">
+            <span class="metric-label">Application version</span>
+            <span class="metric-symbol purple-symbol">⌘</span>
+          </div>
+          <div class="metric-value" id="app-version">—</div>
+          <p class="metric-foot">Version reported by the backend</p>
+        </article>
+
+        <article class="metric-card">
+          <div class="metric-top">
+            <span class="metric-label">Environment</span>
+            <span class="metric-symbol blue-symbol">◇</span>
+          </div>
+          <div class="metric-value" id="app-environment">—</div>
+          <p class="metric-foot">Current runtime configuration</p>
+        </article>
+
+        <article class="metric-card">
+          <div class="metric-top">
+            <span class="metric-label">Backend connection</span>
+            <span class="metric-symbol orange-symbol">↗</span>
+          </div>
+          <div class="metric-value" id="backend-connection">Checking</div>
+          <p class="metric-foot" id="last-checked">Waiting for first response</p>
+        </article>
+      </section>
+
+      <section class="details-grid">
+        <article class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Service information</h2>
+              <p>Basic details about this application instance.</p>
+            </div>
+            <span class="panel-icon">⌁</span>
+          </div>
+          <div class="detail-row">
+            <span>Application</span>
+            <strong id="app-name">GridPulse</strong>
+          </div>
+          <div class="detail-row">
+            <span>Health endpoint</span>
+            <code>/health</code>
+          </div>
+          <div class="detail-row">
+            <span>Version endpoint</span>
+            <code>/version</code>
+          </div>
+          <div class="detail-row">
+            <span>Interface</span>
+            <strong>Web dashboard</strong>
+          </div>
+        </article>
+
+        <article class="panel activity-panel">
+          <div class="panel-heading">
+            <div>
+              <h2>Runtime check</h2>
+              <p>Most recent backend health check.</p>
+            </div>
+            <span class="panel-icon">◷</span>
+          </div>
+          <div class="runtime-state" id="runtime-state">
+            <span class="runtime-indicator"></span>
+            <div>
+              <strong id="runtime-title">Waiting for response</strong>
+              <p id="runtime-message">GridPulse is checking its backend connection.</p>
+            </div>
+          </div>
+          <p class="runtime-note">This dashboard displays application health, not infrastructure-wide health.</p>
+        </article>
+      </section>
+
+      <footer class="footer">
+        <span>GridPulse <span id="footer-version">v1.0.0</span></span>
+        <span>Built for the Group 3 Kubernetes Capstone</span>
+      </footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
