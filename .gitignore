@@ -1,7 +1,22 @@
+# Dependencies
 node_modules/
+
+# Terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfplan
+crash.log
+crash.*.log
+
+# Sensitive variable files
+*.tfvars
+*.tfvars.json
+
+# Environment variables
 .env
 .env.*
-!.env.example
-npm-debug.log*
+
+# OS files
 .DS_Store
-coverage/
+Thumbs.db

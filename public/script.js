@@ -79,3 +79,4 @@ elements.refreshButton.addEventListener("click", () => {
 });
 
 loadDashboard();
+
