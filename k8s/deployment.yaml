@@ -1,47 +1,59 @@
-apiVersion: apps/v1 
-kind: Deployment 
-metadata: 
- name: gridpulse 
- labels: 
-  app: gridpulse 
-spec: 
- replicas: 2 
- selector: 
-  matchLabels: 
-   app: gridpulse 
- template: 
-    metadata: 
-     labels: 
-       app: gridpulse 
-     spec: 
-      containers: 
-       - name: gridpulse 
-         image: gridpulseacr.azurecr.io/gridpulse:v1 
-         imagePullPolicy: IfNotPresent 
-         ports: 
-          - containerPort: 3000 
-            name: http 
-         env: 
-          - name: NODE_ENV 
-            value: "production" 
-          - name: PORT 
-            value: "3000" 
-         readinessProbe: 
-          httpGet: 
-           path: /health 
-           port: 3000 
-          initialDelaySeconds: 5 
-          periodSeconds: 10 
-         livenessProbe: 
-           httpGet: 
-             path: /health 
-             port: 3000 
-           initialDelaySeconds: 15 
-           periodSeconds: 20 
-           resources: 
-            requests: 
-             cpu: "100m" 
-             memory: "128Mi" 
-            limits: 
-              cpu: "500m" 
-              memory: "512Mi" 
+
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: gridpulse
+  labels:
+    app: gridpulse
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: gridpulse
+
+  template:
+    metadata:
+      labels:
+        app: gridpulse
+
+    spec:
+      containers:
+        - name: gridpulse
+          image: gridpulseacr.azurecr.io/gridpulse:v1
+          imagePullPolicy: IfNotPresent
+
+          ports:
+            - containerPort: 3000
+              name: http
+
+          env:
+            - name: NODE_ENV
+              value: "production"
+
+            - name: PORT
+              value: "3000"
+
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
