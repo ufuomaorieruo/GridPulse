@@ -53,3 +53,7 @@ variable "aks_dns_prefix" {
   type        = string
   default     = "gridpulse-aks-dns"
 }
+variable "github_actions_principal_id" {
+  description = "Object ID of the GridPulse GitHub Actions service principal"
+  type        = string
+}
