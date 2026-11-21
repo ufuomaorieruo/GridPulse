@@ -1,0 +1,101 @@
+
+name: GridPulse CD
+
+on:
+  workflow_run:
+    workflows: ["GridPulse CI/CD"]
+    types:
+      - completed
+    branches:
+      - main
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: gridpulse-production-deployment
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy GridPulse to AKS
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push' &&
+      github.event.workflow_run.head_branch == 'main'
+
+    runs-on: ubuntu-latest
+
+    env:
+      ACR_NAME: gridpulseacr
+      ACR_LOGIN_SERVER: gridpulseacr.azurecr.io
+      IMAGE_NAME: gridpulse
+      RESOURCE_GROUP: gridpulse-rg
+      AKS_NAME: gridpulse-aks
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Login to Azure using OIDC
+        uses: azure/login@v3
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Verify Azure authentication
+        run: az account show --output table
+
+      - name: Build and push Docker image
+        env:
+          IMAGE_TAG: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          az acr login --name "$ACR_NAME"
+
+          IMAGE="$ACR_LOGIN_SERVER/$IMAGE_NAME:$IMAGE_TAG"
+
+          docker build -t "$IMAGE" .
+
+          docker push "$IMAGE"
+
+      - name: Install kubectl
+        run: az aks install-cli
+
+      - name: Get AKS credentials
+        run: |
+          az aks get-credentials \
+            --resource-group "$RESOURCE_GROUP" \
+            --name "$AKS_NAME" \
+            --overwrite-existing
+
+      - name: Verify AKS connection
+        run: kubectl get nodes
+
+      - name: Apply Kubernetes manifests with new image
+        env:
+          IMAGE_TAG: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          IMAGE="$ACR_LOGIN_SERVER/$IMAGE_NAME:$IMAGE_TAG"
+
+          sed "s|image: gridpulseacr.azurecr.io/gridpulse:v1|image: ${IMAGE}|" \
+            k8s/deployment.yaml > /tmp/gridpulse-deployment.yaml
+
+          grep -Fq "image: $IMAGE" /tmp/gridpulse-deployment.yaml
+
+          kubectl apply -f /tmp/gridpulse-deployment.yaml
+          kubectl apply -f k8s/service.yaml
+
+      - name: Verify deployment rollout
+        run: |
+          kubectl rollout status deployment/gridpulse \
+            --timeout=180s
+
+      - name: Verify GridPulse deployment
+        run: |
+          kubectl get deployment gridpulse
+          kubectl get pods -l app=gridpulse -o wide
+          kubectl get service gridpulse-service
