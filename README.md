@@ -128,7 +128,7 @@ The infrastructure includes:
 
 Terraform was used to initialize the working directory, validate the configuration, review the execution plan, and provision the resources.
 
-The infrastructure was successfully provisioned and verified through Azure CLI.
+The infrastructure was successfully provisioned and verified through Azure Portal.
 
 ![Terraform and Azure resources](screenshots/terraform-azure-resources.png)
 
@@ -269,7 +269,7 @@ Working on GridPulse provided practical experience with:
 
 ## Further Documentation
 
-The following documents provide more detailed implementation notes and walkthroughs for each project stage. They will be maintained in the repository's `docs/` directory.
+The following documents provide more detailed implementation notes and walkthroughs for each project stage.
 
 | Stage | Documentation |
 |---|---|
