@@ -16,7 +16,7 @@ The project brings together infrastructure as code, containerization, cloud-nati
 
 The solution uses Microsoft Azure for its cloud infrastructure and GitHub for source control and automation.
 
-![GridPulse Architecture](screenshots/gridpulse-architecture.png)
+![GridPulse Architecture](screenshots/gridpulse-architecture.pngg)
 
 ### Deployment flow
 
@@ -28,25 +28,6 @@ The solution uses Microsoft Azure for its cloud infrastructure and GitHub for so
 6. GitHub Actions automates CI checks and the deployment process.
 7. Users access the application through the Kubernetes LoadBalancer Service.
 
-### Architecture diagram
-
-```mermaid
-flowchart LR
-    A[Developer] --> B[GitHub Repository]
-    B --> C[GitHub Actions CI]
-    C --> D[Build and Test]
-    D --> E[GitHub Actions CD]
-    E --> F[Azure Container Registry]
-    F --> G[Azure Kubernetes Service]
-    G --> H[Kubernetes Deployment]
-    H --> I[GridPulse Pods]
-    I --> J[LoadBalancer Service]
-    J --> K[Users]
-
-    T[Terraform] --> L[Azure Infrastructure]
-    L --> F
-    L --> G
-```
 
 ## Technology Stack
 
