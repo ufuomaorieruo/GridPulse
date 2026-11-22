@@ -16,7 +16,7 @@ The project brings together infrastructure as code, containerization, cloud-nati
 
 The solution uses Microsoft Azure for its cloud infrastructure and GitHub for source control and automation.
 
-![GridPulse Architecture](screenshots/gridpulse-architecture.pngg)
+![GridPulse Architecture](screenshots/gridpulse-architecture.png)
 
 ### Deployment flow
 
@@ -273,15 +273,14 @@ The following documents provide more detailed implementation notes and walkthrou
 
 | Stage | Documentation |
 |---|---|
-| 1. Local application deployment | [Local Development and Testing](docs/01-local-development.md) |
-| 2. Docker containerization | [Docker Containerization](docs/02-docker-containerization.md) |
-| 3. Terraform infrastructure | [Azure Infrastructure with Terraform](docs/03-terraform-infrastructure.md) |
-| 4. Kubernetes configuration and deployment | [Kubernetes Deployment on AKS](docs/04-kubernetes-deployment.md) |
-| 5. Continuous Integration and Deployment | [GitHub Actions CI/CD Implementation](docs/05-cicd-implementation.md) |
+| 1. Local application deployment | [Local Development and Testing](https://medium.com/@akpeziorieruo/before-docker-and-kubernetes-running-a-node-js-application-locally-cf724bcd161e) |
+| 2. Docker containerization | [Docker Containerization](https://medium.com/@akpeziorieruo/taking-gridpulse-beyond-local-deployment-my-next-step-with-docker-5228c644b27f) |
+| 3. Terraform infrastructure | [Azure Infrastructure with Terraform](https://medium.com/@akpeziorieruo/taking-gridpulse-beyond-local-deployment-my-next-step-with-docker-5228c644b27f) |
+| 4. Kubernetes configuration and deployment | [Kubernetes Deployment on AKS](https://medium.com/@akpeziorieruo/preparing-gridpulse-for-kubernetes-creating-deployment-and-service-manifests-b94099a3cf04) |
+| 5. Continuous Integration and Deployment | [GitHub Actions CI/CD Implementation](https://medium.com/@akpeziorieruo/automating-gridpulse-deployment-to-aks-with-github-actions-and-openid-connect-6531fd222bfa) |
 | 6. Final deployment and testing | [End-to-End Deployment and Verification](docs/06-final-deployment-testing.md) |
 
 ---
-
-**Project:** Group 3 – Kubernetes Application Deployment Capstone  
+ 
 **Repository:** [GridPulse on GitHub](https://github.com/ufuomaorieruo/GridPulse)  
 **Cloud Platform:** Microsoft Azure
