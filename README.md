@@ -345,7 +345,7 @@ The following articles provide more detailed implementation notes and walkthroug
 |---|---|
 | 1. Local application development | [Before Docker and Kubernetes: Running a Node.js Application Locally](https://medium.com/@akpeziorieruo/before-docker-and-kubernetes-running-a-node-js-application-locally-cf724bcd161e) |
 | 2. Docker containerization | [Taking GridPulse Beyond Local Deployment: My Next Step with Docker](https://medium.com/@akpeziorieruo/taking-gridpulse-beyond-local-deployment-my-next-step-with-docker-5228c644b27f) |
-| 3. Terraform infrastructure |[Provisioning Azure Infrastructure with Terraform: Preparing GridPulse for AKS] https://medium.com/@akpeziorieruo/provisioning-azure-infrastructure-with-terraform-preparing-gridpulse-for-aks-fb5358a1fc3f?sharedUserId=akpeziorieruo |
+| | 3. Terraform infrastructure | [Provisioning Azure Infrastructure with Terraform: Preparing GridPulse for AKS](https://medium.com/@akpeziorieruo/provisioning-azure-infrastructure-with-terraform-preparing-gridpulse-for-aks-fb5358a1fc3f) |
 | 4. Kubernetes configuration | [Preparing GridPulse for Kubernetes: Creating Deployment and Service Manifests](https://medium.com/@akpeziorieruo/preparing-gridpulse-for-kubernetes-creating-deployment-and-service-manifests-b94099a3cf04) |
 | 5. CI/CD implementation | [Automating GridPulse Deployment to AKS with GitHub Actions and OpenID Connect](https://medium.com/@akpeziorieruo/automating-gridpulse-deployment-to-aks-with-github-actions-and-openid-connect-6531fd222bfa) |
 | 6. Final deployment and testing | [End-to-End Deployment and Verification](https://medium.com/@akpeziorieruo/final-deployment-and-testing-of-gridpulse-on-azure-kubernetes-service-d7524e55f668) |
