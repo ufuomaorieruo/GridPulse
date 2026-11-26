@@ -282,15 +282,11 @@ The GitHub Actions identity also requires the appropriate permissions to push im
 
 ## 7. Challenges and Solutions
 
-| Challenge | Solution |
-|---|---|
-| Ensuring AKS could pull images from ACR | Configured the AKS kubelet identity with the `AcrPull` role on the registry. |
-| Authenticating GitHub Actions to Azure | Configured Microsoft Entra federated credentials and GitHub repository secrets for OIDC authentication. |
-| Granting GitHub Actions access to Azure resources | Assigned the required ACR push and AKS credential access roles to the GitHub Actions identity. |
-| Managing container image versions | Used Git commit SHA tags in the automated deployment workflow so each deployment can reference a specific source revision. |
-| Verifying application availability | Used Kubernetes readiness and liveness probes and tested the `/health` endpoint. |
-| Maintaining application availability after Pod failure | Tested Kubernetes self-healing by deleting a Pod and observing its replacement. |
-| Managing infrastructure and application deployment separately | Used Terraform for infrastructure provisioning and Kubernetes manifests for application configuration. |
+| Challenge                                                                                                  | Solution                                                                                                                                                                                                                    |
+| ---------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| GitHub Actions could authenticate to Azure but lacked the permissions required to complete the deployment. | Updated Terraform `main.tf` with Contributor, AcrPush and AKS Cluster User role assignments for the GitHub Actions identity, enabling it to manage the required resources, push images to ACR and retrieve AKS credentials. |
+| AKS could not access the private container image stored in ACR.                                            | Assigned the `AcrPull` role to the AKS kubelet identity, allowing the cluster to pull the application image from ACR.                                                                                                       |
+| Automating the deployment of updated application versions.                                                 | Separated the GitHub Actions automation into `ci.yml` and `cd.yml`. The CD workflow builds images using Git commit SHA tags, pushes them to ACR and updates the AKS Deployment.                                             |
 
 ## 8. Project Structure
 
